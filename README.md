@@ -6,17 +6,17 @@ This project demonstrates a hybrid AI agent that performs autonomous medical QA 
 It was developed for EndoSuite, a surgical training simulator, to enable contextually grounded question-answering and document navigation over simulation manuals.
 
 Key Features:
-Intent-Aware Reasoning: Automatically detects query types (count, list, details, or general) to optimize response flow.
+* Intent-Aware Reasoning: Automatically detects query types (count, list, details, or general) to optimize response flow.
 
-Efficient Routing: Structured questions are served from a local cache, while open-ended ones trigger retrieval and model inference.
+* Efficient Routing: Structured questions are served from a local cache, while open-ended ones trigger retrieval and model inference.
 
-Vector Search with FAISS: Embeds Markdown documents using BAAI/bge-base-en-v1.5 and retrieves semantically relevant chunks.
+* Vector Search with FAISS: Embeds Markdown documents using BAAI/bge-base-en-v1.5 and retrieves semantically relevant chunks.
 
-Remote Model Inference: Uses a Hugging Face Inference Endpoint for scalable GPU-backed LLM responses (Mistral-7B-Instruct).
+* Remote Model Inference: Uses a Hugging Face Inference Endpoint for scalable GPU-backed LLM responses (Mistral-7B-Instruct).
 
-FastAPI Deployment: Clean REST API (/ask) for interactive or programmatic use.
+* FastAPI Deployment: Clean REST API (/ask) for interactive or programmatic use.
 
-Fly.io Configuration: Includes Docker and fly.toml for cloud deployment with persistent FAISS cache volumes.
+* Fly.io Configuration: Includes Docker and fly.toml for cloud deployment with persistent FAISS cache volumes.
 
 System Architecture:
 User Query → Intent Classifier → (Structured Query → Cache Lookup) or (Open-Ended Query → FAISS Retriever → Hugging Face Endpoint) → Response Cleaner → FastAPI Endpoint (/ask)
