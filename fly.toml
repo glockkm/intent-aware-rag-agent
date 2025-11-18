@@ -1,0 +1,38 @@
+# fly.toml app configuration file
+
+app = 'my-endo-suite-api'
+primary_region = 'sjc'
+
+[build]
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = false   # keep machine always running
+  auto_start_machines = true
+  min_machines_running = 2
+
+  [http_service.concurrency]
+    type = "requests"
+    soft_limit = 10
+    hard_limit = 25
+
+[[vm]]
+  cpu_kind = "shared"
+  cpus = 1
+  memory = "2gb"
+
+[[mounts]]
+  source = "hf_cache"
+  destination = "/data"
+
+[env]
+  INDEX_PATH = "/data/faiss_index"
+  HUGGINGFACE_HUB_CACHE = "/data/hf_cache"
+  TRANSFORMERS_CACHE = "/data/hf_cache"
+
+  # These are placeholders — actual values are provided via `flyctl secrets set`
+  HF_ENDPOINT_URL = ""
+  HF_API_TOKEN = ""
+  HUGGINGFACE_HUB_TOKEN = ""
+
